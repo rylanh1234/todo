@@ -1,11 +1,4 @@
-const myList = [];
-let title = "";
-let description = "";
-let dueDate = "";
-let priority = "";
-let notes = "";
-let status = "incomplete";
-let data = true;
+import { createItemDivs } from "./DOM";
 
 function Item(title, description, dueDate, priority, notes, status, data) {
     this.title = title;
@@ -17,9 +10,11 @@ function Item(title, description, dueDate, priority, notes, status, data) {
     this.data = data;
 }
 
-function addItemToList(title, description, dueDate, priority, notes, status) {
+function addItemToList(myList, title, description, dueDate, priority, notes, status) {
+    let data = true;
     const newItem = new Item(title, description, dueDate, priority, notes, status, data)
     myList.push(newItem);
-    createItemDivs();
+    createItemDivs(myList);
 }
 
+export { Item, addItemToList};

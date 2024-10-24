@@ -9,6 +9,7 @@ function createTextForm(form, label, id, placeholder) {
         formInput.setAttribute("name", id);
         formInput.setAttribute("placeholder", placeholder);
         form.appendChild(formInput);
+        return formInput;
 }
 
 export { createTextForm }
