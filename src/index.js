@@ -1,5 +1,5 @@
 import { addItemToList } from "./create-items";
-import { createTextForm } from "./create-form";
+import { createTextForm, createRadioForm } from "./create-form";
 
 // Initialize list
 const myList = [];
@@ -20,13 +20,20 @@ newItemBtn.addEventListener("click", () => {
         const titleForm = [newForm, "Title", "title", "Title"];
         const descriptionForm = [newForm, "Description", "description", "Description"];
         const dueDateForm = [newForm, "Due Date", "dueDate", "Due Date"];
-        const priorityForm = [newForm, "Priority", "priority", "Priority"];
+        const idArray = ["one", "two", "three", "four"];
+        const labelArray = ["1", "2", "3", "4"];
+        const checkedArray = [];
+        for (let i = 0; i < idArray.length; i++) {
+            checkedArray.push(false);
+        }
+        // checkedArray[0] = true;
+        const priorityForm = [newForm, "Priority", "priority", idArray, labelArray, checkedArray];
         const notesForm = [newForm, "Notes", "notes", "Notes"];
 
         const inputTitle = createTextForm(...titleForm);
         const inputDescription = createTextForm(...descriptionForm);
         const inputDueDate = createTextForm(...dueDateForm);
-        const inputPriority = createTextForm(...priorityForm);
+        createRadioForm(...priorityForm);
         const inputNotes = createTextForm(...notesForm);
 
         const submitbtn = document.createElement("input");
@@ -41,7 +48,7 @@ newItemBtn.addEventListener("click", () => {
             const title = inputTitle.value;
             const description = inputDescription.value;
             const dueDate = inputDueDate.value;
-            const priority = inputPriority.value;
+            const priority = document.querySelector('input[name="priority"]:checked').value;
             const notes = inputNotes.value;
             addItemToList(myList, title, description, dueDate, priority, notes);
             this.remove();

@@ -8,25 +8,24 @@ function createItemDivs(myList) {
     myList.forEach((item, itemIdx) => {
         const itemCard = document.createElement("div");
         itemCard.classList.add("itemCard");
-        itemCard.textContent = itemIdx + 1;
-        itemCard.setAttribute("id", "item" + itemIdx + 1)
+        itemCard.setAttribute("id", "item" + itemIdx)
         container.appendChild(itemCard);
 
         // create a div to display the item's properties (title, dueDate, priority)
         const itemCardProperties = document.createElement("div");
         itemCardProperties.classList.add("itemCardProperties");
         itemCardProperties.textContent = item.title + " - " + item.description;
-        if (item.priority == 1) {
-            itemCardProperties.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+        if (item.priority == "one") {
+            itemCard.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
         }
-        else if (item.priority == 2) {
-            itemCardProperties.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
+        else if (item.priority == "two") {
+            itemCard.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
         }
-        else if (item.priority == 3) {
-            itemCardProperties.style.backgroundColor = "rgba(0, 0, 255, 0.5";
+        else if (item.priority == "three") {
+            itemCard.style.backgroundColor = "rgba(0, 0, 255, 0.5";
         }
         else {
-            itemCardProperties.style.backgroundColor = "rgba(211, 211, 211, 0.5)";
+            itemCard.style.backgroundColor = "rgba(211, 211, 211, 0.5)";
         }
         itemCard.appendChild(itemCardProperties);
     });
