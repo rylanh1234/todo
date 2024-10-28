@@ -16,16 +16,16 @@ function createItemDivs(myList) {
         itemCardProperties.classList.add("itemCardProperties");
         itemCardProperties.textContent = item.title + " - " + item.description;
         if (item.priority == "one") {
-            itemCard.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+            itemCard.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
         }
         else if (item.priority == "two") {
-            itemCard.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
+            itemCard.style.backgroundColor = "rgb(255, 255, 0, 0.5)";
         }
         else if (item.priority == "three") {
-            itemCard.style.backgroundColor = "rgba(0, 0, 255, 0.5";
+            itemCard.style.backgroundColor = "rgb(0, 0, 255, 0.5";
         }
         else {
-            itemCard.style.backgroundColor = "rgba(211, 211, 211, 0.5)";
+            itemCard.style.backgroundColor = "rgb(211, 211, 211, 0.5)";
         }
         itemCard.appendChild(itemCardProperties);
     });

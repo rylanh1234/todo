@@ -28,12 +28,13 @@ newItemBtn.addEventListener("click", () => {
         }
         // checkedArray[0] = true;
         const priorityForm = [newForm, "Priority", "priority", idArray, labelArray, checkedArray];
+        const priorityColors = ["rgb(255, 0, 0, 0.5)","rbg(255, 255, 0, 0.5)","rgb(0, 0, 255, 0.5)", "rgb(211, 211, 211, 0.5)"];
         const notesForm = [newForm, "Notes", "notes", "Notes"];
 
         const inputTitle = createTextForm(...titleForm);
         const inputDescription = createTextForm(...descriptionForm);
         const inputDueDate = createTextForm(...dueDateForm);
-        createRadioForm(...priorityForm);
+        createRadioForm(...priorityForm, priorityColors);
         const inputNotes = createTextForm(...notesForm);
 
         const submitbtn = document.createElement("input");

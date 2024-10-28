@@ -12,7 +12,7 @@ function createTextForm(form, label, id, placeholder) {
     return formInput;
 }
 
-function createRadioForm(form, legendText, name, idArray, labelArray, checkedArray) {
+function createRadioForm(form, legendText, name, idArray, labelArray, checkedArray, labelColourArray) {
     const legend = document.createElement("legend");
     legend.textContent = legendText;
     form.appendChild(legend);
@@ -26,11 +26,12 @@ function createRadioForm(form, legendText, name, idArray, labelArray, checkedArr
         if (checkedArray[idIdx] == true) {
             input.setAttribute("checked", true);
         }
-        form.appendChild(input);
         const label = document.createElement("label");
         label.setAttribute("for", id);
         label.textContent = labelArray[idIdx];
+        label.style.color = labelColourArray[idIdx];
         form.appendChild(label);
+        form.appendChild(input);
         return input
     })
 }
