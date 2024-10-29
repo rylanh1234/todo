@@ -1,3 +1,4 @@
+import "./styles.css";
 import { addItemToList } from "./create-items";
 import { createTextForm, createRadioForm } from "./create-form";
 
@@ -27,8 +28,8 @@ newItemBtn.addEventListener("click", () => {
             checkedArray.push(false);
         }
         // checkedArray[0] = true;
-        const priorityForm = [newForm, "Priority", "priority", idArray, labelArray, checkedArray];
-        const priorityColors = ["rgb(255, 0, 0, 0.5)","rbg(255, 255, 0, 0.5)","rgb(0, 0, 255, 0.5)", "rgb(211, 211, 211, 0.5)"];
+        const priorityForm = [newForm, "Priority", "priority", idArray, labelArray, checkedArray, true];
+        const priorityColors = ["rgb(255, 0, 0, 0.5)", "rgb(255, 255, 0, 0.5)", "rgb(0, 0, 255, 0.5)", "rgb(211, 211, 211, 0.5)"];
         const notesForm = [newForm, "Notes", "notes", "Notes"];
 
         const inputTitle = createTextForm(...titleForm);
@@ -57,3 +58,5 @@ newItemBtn.addEventListener("click", () => {
         })
     }
 })
+
+export { myList }

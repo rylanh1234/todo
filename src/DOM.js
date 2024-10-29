@@ -1,3 +1,24 @@
+import { myList } from ".";
+
+function createCheckbox(itemCard) {
+    const checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.classList.add("checkbox");
+    itemCard.appendChild(checkbox);
+    checkbox.addEventListener("change", () => {
+        const itemText = checkbox.parentElement.querySelector(".itemCardProperties");
+        const itemNumber = checkbox.parentElement.id.slice(4);
+        if (checkbox.checked) {
+            myList[itemNumber].status = "complete";
+            itemText.style = "text-decoration: line-through";
+        }
+        else if (!checkbox.checked) {
+            myList[itemNumber].status = "incomplete";
+            itemText.style = "text-decoration: none";
+        }
+    })
+}
+
 function createItemDivs(myList) {
     const container = document.querySelector("#container");
     const children = container.querySelectorAll("*");
@@ -10,11 +31,16 @@ function createItemDivs(myList) {
         itemCard.classList.add("itemCard");
         itemCard.setAttribute("id", "item" + itemIdx)
         container.appendChild(itemCard);
+        createCheckbox(itemCard)
 
         // create a div to display the item's properties (title, dueDate, priority)
         const itemCardProperties = document.createElement("div");
         itemCardProperties.classList.add("itemCardProperties");
         itemCardProperties.textContent = item.title + " - " + item.description;
+        if (item.status == "complete") {
+            itemCard.querySelector("input").checked = true;
+            itemCardProperties.style = "text-decoration: line-through";
+        }
         if (item.priority == "one") {
             itemCard.style.backgroundColor = "rgb(255, 0, 0, 0.5)";
         }
@@ -29,7 +55,6 @@ function createItemDivs(myList) {
         }
         itemCard.appendChild(itemCardProperties);
     });
-    // addHoverDisplay();
 }
 
 export { createItemDivs };
