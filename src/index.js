@@ -16,7 +16,6 @@ newItemBtn.addEventListener("click", () => {
     // only allow one form at a time
     if (formContainer.children.length == 0) {
         // creates the form and assign the input to the variables input...
-        container.style.gridColumn = "1 / 2";
         const newForm = document.createElement("form");
         const titleForm = [newForm, "Title", "title", "Title"];
         const descriptionForm = [newForm, "Description", "description", "Description"];
@@ -54,7 +53,6 @@ newItemBtn.addEventListener("click", () => {
             const notes = inputNotes.value;
             addItemToList(myList, title, description, dueDate, priority, notes);
             this.remove();
-            container.style.gridColumn = "1 / 3";
         })
     }
 })
