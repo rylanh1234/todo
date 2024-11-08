@@ -45,14 +45,15 @@ function createExpand(itemCard, description, notes) {
     })
 }
 
-function createRemove(itemCard, data) {
+function createRemove(itemCard) {
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("removeBtn");
     removeBtn.textContent = "⨉";
     itemCard.appendChild(removeBtn);
+    const itemNumber = itemCard.id.slice(4);
     removeBtn.addEventListener("click", function (e) {
         e.target.parentElement.remove();
-        data = false;
+        myList[itemNumber].data = false;
     })
 }
 
@@ -64,6 +65,9 @@ function createItemDivs(myList) {
     })
     // for each item in list, create a div, number it, and add it to list
     myList.forEach((item, itemIdx) => {
+        if (item.data == false) {
+            myList.splice(itemIdx, 1);
+        }
         const itemCard = document.createElement("div");
         itemCard.classList.add("itemCard");
         itemCard.setAttribute("id", "item" + itemIdx)
@@ -92,7 +96,7 @@ function createItemDivs(myList) {
         }
         itemCard.appendChild(itemCardProperties);
         createExpand(itemCard, item.description, item.notes);
-        createRemove(itemCard, item.data);
+        createRemove(itemCard);
     });
 }
 
