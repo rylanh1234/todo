@@ -23,9 +23,10 @@ function createExpand(itemCard, description, notes) {
     const expandBtn = document.createElement("button");
     expandBtn.classList.add("expandBtn");
     itemCard.appendChild(expandBtn);
+    // itemCard should contain checkbox, properties, expandBtn, removeBtn, and expandDiv when expanded
+    const itemCardLength = itemCard.children.length;
     expandBtn.addEventListener("click", () => {
-        // itemCard should contain checkbox, properties, expandBtn, and expandDiv when expanded
-        if (itemCard.children.length == 3) {
+        if (itemCard.children.length == itemCardLength) {
             const expandDiv = document.createElement("div");
             expandDiv.classList.add("expandDiv");
             const descriptionDiv = document.createElement("div");
@@ -38,9 +39,20 @@ function createExpand(itemCard, description, notes) {
             expandDiv.appendChild(notesDiv);
             itemCard.appendChild(expandDiv);
         }
-        else if (itemCard.children.length == 4) {
+        else if (itemCard.children.length == itemCardLength + 1) {
             itemCard.querySelector(".expandDiv").remove();
         }
+    })
+}
+
+function createRemove(itemCard, data) {
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("removeBtn");
+    removeBtn.textContent = "⨉";
+    itemCard.appendChild(removeBtn);
+    removeBtn.addEventListener("click", function (e) {
+        e.target.parentElement.remove();
+        data = false;
     })
 }
 
@@ -80,6 +92,7 @@ function createItemDivs(myList) {
         }
         itemCard.appendChild(itemCardProperties);
         createExpand(itemCard, item.description, item.notes);
+        createRemove(itemCard, item.data);
     });
 }
 
