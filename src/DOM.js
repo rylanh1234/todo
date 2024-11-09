@@ -1,4 +1,5 @@
 import { myList } from ".";
+import { editTextForm } from "./create-form";
 
 function createCheckbox(itemCard) {
     const checkbox = document.createElement("input");
@@ -19,13 +20,27 @@ function createCheckbox(itemCard) {
     })
 }
 
+function createEdit() {
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("editBtn");
+    editBtn.textContent = "Edit";
+    expandDiv.appendChild(editBtn);
+    editBtn.addEventListener("click", () => {
+        
+    })
+}
+
 function createExpand(itemCard, description, notes) {
     const expandBtn = document.createElement("button");
     expandBtn.classList.add("expandBtn");
     itemCard.appendChild(expandBtn);
     // itemCard should contain checkbox, properties, expandBtn, removeBtn, and expandDiv when expanded
     const itemCardLength = itemCard.children.length;
+    console.log(itemCard.children)
+    console.log(itemCardLength)
+    console.log(itemCard.children.length)
     expandBtn.addEventListener("click", () => {
+        console.log(itemCard.children.length)
         if (itemCard.children.length == itemCardLength) {
             const expandDiv = document.createElement("div");
             expandDiv.classList.add("expandDiv");
@@ -37,6 +52,7 @@ function createExpand(itemCard, description, notes) {
             notesDiv.classList.add("notesDiv");
             notesDiv.textContent = "Notes: " + notes;
             expandDiv.appendChild(notesDiv);
+            createEdit();
             itemCard.appendChild(expandDiv);
         }
         else if (itemCard.children.length == itemCardLength + 1) {
