@@ -20,7 +20,7 @@ function createCheckbox(itemCard) {
     })
 }
 
-function createEdit() {
+function createEdit(expandDiv) {
     const editBtn = document.createElement("button");
     editBtn.classList.add("editBtn");
     editBtn.textContent = "Edit";
@@ -36,11 +36,7 @@ function createExpand(itemCard, description, notes) {
     itemCard.appendChild(expandBtn);
     // itemCard should contain checkbox, properties, expandBtn, removeBtn, and expandDiv when expanded
     const itemCardLength = itemCard.children.length;
-    console.log(itemCard.children)
-    console.log(itemCardLength)
-    console.log(itemCard.children.length)
     expandBtn.addEventListener("click", () => {
-        console.log(itemCard.children.length)
         if (itemCard.children.length == itemCardLength) {
             const expandDiv = document.createElement("div");
             expandDiv.classList.add("expandDiv");
@@ -52,7 +48,7 @@ function createExpand(itemCard, description, notes) {
             notesDiv.classList.add("notesDiv");
             notesDiv.textContent = "Notes: " + notes;
             expandDiv.appendChild(notesDiv);
-            createEdit();
+            createEdit(expandDiv);
             itemCard.appendChild(expandDiv);
         }
         else if (itemCard.children.length == itemCardLength + 1) {
@@ -111,8 +107,8 @@ function createItemDivs(myList) {
             itemCard.style.backgroundColor = "rgb(211, 211, 211, 0.5)";
         }
         itemCard.appendChild(itemCardProperties);
-        createExpand(itemCard, item.description, item.notes);
         createRemove(itemCard);
+        createExpand(itemCard, item.description, item.notes);
     });
 }
 
