@@ -1,5 +1,5 @@
 import { myList } from ".";
-import { addItemToList } from "./create-items";
+import { addItemToList, editListItem } from "./create-items";
 
 function createTextForm(form, label, id, placeholder, value) {
     const formLabel = document.createElement("label")
@@ -44,7 +44,7 @@ function createRadioForm(form, legendText, name, idArray, labelArray, checkedArr
     })
 }
 
-function createNewItemForm(myList, edit, valueArray) {
+function createNewItemForm(myList, edit, valueArray, item) {
     // creates the form and assign the input to the variables input...
     const newForm = document.createElement("form");
     const titleForm = [newForm, "Title", "title", "Title"];
@@ -103,14 +103,19 @@ function createNewItemForm(myList, edit, valueArray) {
         const dueDate = inputDueDate.value;
         const priority = document.querySelector('input[name="priority"]:checked').value;
         const notes = inputNotes.value;
-        addItemToList(myList, title, description, dueDate, priority, notes, itemStatus);
+        if (edit == false) {
+            addItemToList(myList, title, description, dueDate, priority, notes, itemStatus);
+        }
+        else if (edit == true) {
+            editListItem(item, title, description, dueDate, priority, notes, itemStatus);
+        }
         this.remove();
     })
 }
 
-function editTextForm(valueArray) {
+function editTextForm(item, valueArray) {
     const edit = true;
-    createNewItemForm(myList, edit, valueArray);
+    createNewItemForm(myList, edit, valueArray, item);
 }
 
 export { createNewItemForm, editTextForm }

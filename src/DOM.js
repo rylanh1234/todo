@@ -29,7 +29,7 @@ function createEdit(expandDiv, itemCard) {
         const itemNumber = itemCard.id.slice(4);
         const item = myList[itemNumber];
         const valueArray = [item.title, item.description, item.dueDate, item.priority, item.notes, item.status]
-        editTextForm(valueArray);
+        editTextForm(item, valueArray);
     })
 }
 
