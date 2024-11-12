@@ -26,16 +26,20 @@ function createEdit(expandDiv, itemCard) {
     editBtn.textContent = "Edit";
     expandDiv.appendChild(editBtn);
     editBtn.addEventListener("click", () => {
-        const itemNumber = itemCard.id.slice(4);
-        const item = myList[itemNumber];
-        const valueArray = [item.title, item.description, item.dueDate, item.priority, item.notes, item.status]
-        editTextForm(item, valueArray);
+        const formContainer = document.querySelector("#formContainer")
+        if (formContainer.children.length == 0) {
+            const itemNumber = itemCard.id.slice(4);
+            const item = myList[itemNumber];
+            const valueArray = [item.title, item.description, item.dueDate, item.priority, item.notes, item.status]
+            editTextForm(item, valueArray);
+        }
     })
 }
 
 function createExpand(itemCard, description, notes) {
     const expandBtn = document.createElement("button");
     expandBtn.classList.add("expandBtn");
+    expandBtn.textContent = "▼";
     itemCard.appendChild(expandBtn);
     // itemCard should contain checkbox, properties, expandBtn, removeBtn, and expandDiv when expanded
     const itemCardLength = itemCard.children.length;
@@ -53,9 +57,11 @@ function createExpand(itemCard, description, notes) {
             expandDiv.appendChild(notesDiv);
             createEdit(expandDiv, itemCard);
             itemCard.appendChild(expandDiv);
+            expandBtn.textContent = "▲";
         }
         else if (itemCard.children.length == itemCardLength + 1) {
             itemCard.querySelector(".expandDiv").remove();
+            expandBtn.textContent = "▼";
         }
     })
 }
