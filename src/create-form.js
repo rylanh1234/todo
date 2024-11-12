@@ -1,7 +1,7 @@
 import { myList } from ".";
 import { addItemToList } from "./create-items";
 
-function createTextForm(form, label, id, placeholder) {
+function createTextForm(form, label, id, placeholder, value) {
     const formLabel = document.createElement("label")
     formLabel.setAttribute("for", id);
     formLabel.textContent = label;
@@ -11,6 +11,9 @@ function createTextForm(form, label, id, placeholder) {
     formInput.setAttribute("id", id);
     formInput.setAttribute("name", id);
     formInput.setAttribute("placeholder", placeholder);
+    if (value) {
+        formInput.setAttribute("value", value);
+    }
     form.appendChild(formInput);
     return formInput;
 }
@@ -41,7 +44,7 @@ function createRadioForm(form, legendText, name, idArray, labelArray, checkedArr
     })
 }
 
-function createNewItemForm(myList) {
+function createNewItemForm(myList, edit, valueArray) {
     // creates the form and assign the input to the variables input...
     const newForm = document.createElement("form");
     const titleForm = [newForm, "Title", "title", "Title"];
@@ -57,6 +60,28 @@ function createNewItemForm(myList) {
     const priorityForm = [newForm, "Priority", "priority", idArray, labelArray, checkedArray, true];
     const priorityColors = ["rgb(255, 0, 0, 0.5)", "rgb(255, 255, 0, 0.5)", "rgb(0, 0, 255, 0.5)", "rgb(211, 211, 211, 0.5)"];
     const notesForm = [newForm, "Notes", "notes", "Notes"];
+
+    let itemStatus = "incomplete";
+    if (edit == true) {
+        titleForm.push(valueArray[0]);
+        descriptionForm.push(valueArray[1]);
+        dueDateForm.push(valueArray[2]);
+
+        if (valueArray[3] == "one") {
+            checkedArray[0] = true;
+        }
+        else if (valueArray[3] == "two") {
+            checkedArray[1] = true;
+        }
+        else if (valueArray[3] == "three") {
+            checkedArray[2] = true;
+        }
+        else {
+            checkedArray[3] = true;
+        }
+        notesForm.push(valueArray[4]);
+        itemStatus = valueArray[5];
+    }
 
     const inputTitle = createTextForm(...titleForm);
     const inputDescription = createTextForm(...descriptionForm);
@@ -78,13 +103,14 @@ function createNewItemForm(myList) {
         const dueDate = inputDueDate.value;
         const priority = document.querySelector('input[name="priority"]:checked').value;
         const notes = inputNotes.value;
-        addItemToList(myList, title, description, dueDate, priority, notes);
+        addItemToList(myList, title, description, dueDate, priority, notes, itemStatus);
         this.remove();
     })
 }
 
 function editTextForm(valueArray) {
-    createNewItemForm(myList);
+    const edit = true;
+    createNewItemForm(myList, edit, valueArray);
 }
 
 export { createNewItemForm, editTextForm }

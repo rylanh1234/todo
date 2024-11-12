@@ -10,10 +10,15 @@ function Item(title, description, dueDate, priority, notes, status, data) {
     this.data = data;
 }
 
-function addItemToList(myList, title, description, dueDate, priority, notes) {
+function addItemToList(myList, title, description, dueDate, priority, notes, status) {
     const data = true;
-    const status = "incomplete";
-    const newItem = new Item(title, description, dueDate, priority, notes, status, data)
+    if (status == "complete") {
+        const itemStatus = status;
+    }
+    else {
+        const itemStatus = status;
+    }
+    const newItem = new Item(title, description, dueDate, priority, notes, itemStatus, data)
     myList.push(newItem);
     createItemDivs(myList);
 }

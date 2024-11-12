@@ -14,7 +14,8 @@ newItemBtn.addEventListener("click", () => {
     })
     // only allow one form at a time
     if (formContainer.children.length == 0) {
-        createNewItemForm(myList);
+        const edit = false;
+        createNewItemForm(myList, edit);
     }
 })
 

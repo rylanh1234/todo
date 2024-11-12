@@ -20,13 +20,16 @@ function createCheckbox(itemCard) {
     })
 }
 
-function createEdit(expandDiv) {
+function createEdit(expandDiv, itemCard) {
     const editBtn = document.createElement("button");
     editBtn.classList.add("editBtn");
     editBtn.textContent = "Edit";
     expandDiv.appendChild(editBtn);
     editBtn.addEventListener("click", () => {
-        
+        const itemNumber = itemCard.id.slice(4);
+        const item = myList[itemNumber];
+        const valueArray = [item.title, item.description, item.dueDate, item.priority, item.notes, item.status]
+        editTextForm(valueArray);
     })
 }
 
@@ -48,7 +51,7 @@ function createExpand(itemCard, description, notes) {
             notesDiv.classList.add("notesDiv");
             notesDiv.textContent = "Notes: " + notes;
             expandDiv.appendChild(notesDiv);
-            createEdit(expandDiv);
+            createEdit(expandDiv, itemCard);
             itemCard.appendChild(expandDiv);
         }
         else if (itemCard.children.length == itemCardLength + 1) {
