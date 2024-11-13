@@ -1,5 +1,6 @@
 import { myList } from ".";
 import { addItemToList, editListItem } from "./create-items";
+import { format } from "date-fns";
 
 function createTextForm(form, label, id, placeholder, value) {
     const formLabel = document.createElement("label")
@@ -100,7 +101,8 @@ function createNewItemForm(myList, edit, valueArray, item) {
         event.preventDefault();
         const title = inputTitle.value;
         const description = inputDescription.value;
-        const dueDate = inputDueDate.value;
+        let dueDate = inputDueDate.value;
+        dueDate = format(dueDate, "yyyy-MM-dd");
         const priority = document.querySelector('input[name="priority"]:checked').value;
         const notes = inputNotes.value;
         if (edit == false) {
