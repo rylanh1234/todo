@@ -1,5 +1,5 @@
 import { myList } from ".";
-import { editTextForm } from "./create-form";
+import { editTextForm, updateStorage } from "./create-form";
 
 function createCheckbox(itemCard) {
     const checkbox = document.createElement("input");
@@ -75,6 +75,8 @@ function createRemove(itemCard) {
     removeBtn.addEventListener("click", function (e) {
         e.target.parentElement.remove();
         myList[itemNumber].data = false;
+        myList.splice(itemNumber, 1);
+        updateStorage(myList);
     })
 }
 
@@ -86,9 +88,9 @@ function createItemDivs(myList) {
     })
     // for each item in list, create a div, number it, and add it to list
     myList.forEach((item, itemIdx) => {
-        if (item.data == false) {
-            myList.splice(itemIdx, 1);
-        }
+        // if (item.data == false) {
+        //     myList.splice(itemIdx, 1);
+        // }
         const itemCard = document.createElement("div");
         itemCard.classList.add("itemCard");
         itemCard.setAttribute("id", "item" + itemIdx)

@@ -2,6 +2,13 @@ import { myList } from ".";
 import { addItemToList, editListItem } from "./create-items";
 import { format } from "date-fns";
 
+function updateStorage(newList) {
+    const currentList = localStorage.getItem("myList");
+    if (currentList !== newList) {
+        localStorage.setItem("myList", JSON.stringify(newList));
+    }
+}
+
 function createTextForm(form, label, id, placeholder, value) {
     const formLabel = document.createElement("label")
     formLabel.setAttribute("for", id);
@@ -102,7 +109,9 @@ function createNewItemForm(myList, edit, valueArray, item) {
         const title = inputTitle.value;
         const description = inputDescription.value;
         let dueDate = inputDueDate.value;
-        dueDate = format(dueDate, "yyyy-MM-dd");
+        if (dueDate !== "") {
+            dueDate = format(dueDate, "yyyy-MM-dd");
+        }
         const priority = document.querySelector('input[name="priority"]:checked').value;
         const notes = inputNotes.value;
         if (edit == false) {
@@ -111,6 +120,7 @@ function createNewItemForm(myList, edit, valueArray, item) {
         else if (edit == true) {
             editListItem(item, title, description, dueDate, priority, notes, itemStatus);
         }
+        updateStorage(myList);
         this.remove();
     })
 }
@@ -120,4 +130,4 @@ function editTextForm(item, valueArray) {
     createNewItemForm(myList, edit, valueArray, item);
 }
 
-export { createNewItemForm, editTextForm }
+export { createNewItemForm, editTextForm, updateStorage }

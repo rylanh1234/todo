@@ -1,8 +1,14 @@
 import "./styles.css";
 import { createNewItemForm } from "./create-form";
+import { createItemDivs } from "./DOM";
 
 // Initialize list
-const myList = [];
+let myList = [];
+const storedList = JSON.parse(localStorage.getItem("myList"));
+if (storedList) {
+    myList = storedList;
+    createItemDivs(myList);
+}
 
 const formContainer = document.querySelector("#formContainer")
 const newItemBtn = document.querySelector("#newItemBtn")
